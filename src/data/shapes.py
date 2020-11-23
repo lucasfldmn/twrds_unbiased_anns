@@ -36,7 +36,7 @@ def make_shape(shape = 'square', color = 'red', size = 50):
 	return buffer.getvalue()
 
 def make_square(color = 'red', size = 50):
-	return make_shape(shape = 'square', color, size)
+	return make_shape('square', color, size)
 
 def make_circle(color = 'red', size = 50):
-	return make_shape(shape = 'circle', color, size)
+	return make_shape('circle', color, size)
