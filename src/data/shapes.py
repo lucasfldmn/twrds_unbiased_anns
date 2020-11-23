@@ -11,7 +11,7 @@ def make_shape(shape = 'square', color = 'red', size = 50):
  
 
 	# Draw shape depending on type
-	if shape = 'square':
+	if shape == 'square':
 		# Draw square
 		# Calculate width and height
 		square_size = size/100
@@ -19,7 +19,7 @@ def make_shape(shape = 'square', color = 'red', size = 50):
 		starting_pos = (1 - square_size) / 2
 		circle = plt.Rectangle(xy = (starting_pos, starting_pos), width = square_size, height = square_size, color = color)
 		ax.add_artist(circle)		
-	if shape = 'circle':
+	if shape == 'circle':
 		# Draw circle
 		circle = plt.Circle(xy = (0.5, 0.5), radius = 0.5*size/100, color = color)
 		ax.add_artist(circle)
