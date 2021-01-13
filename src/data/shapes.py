@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 def make_shape(shape = 'square', color = 'red', size = 50):
 	# Define figure
-	fig = plt.figure(figsize = (10,10))
+	fig = plt.figure(figsize = (5,5))
 	ax = fig.gca()
 
 	# Set background and plotting area to black, remove axis
