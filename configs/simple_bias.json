@@ -6,7 +6,7 @@
     "configs": [
         {
             "name": "control",
-            "dataset_size": 200,
+            "dataset_size": 300,
             "perc_white_square": 25,
             "mean_white_square": 50,
             "stddev_white_square": 10,
@@ -30,7 +30,7 @@
         },
         {
             "name": "biased",
-            "dataset_size": 200,
+            "dataset_size": 300,
             "perc_white_square": 35,
             "mean_white_square": 70,
             "stddev_white_square": 5,
