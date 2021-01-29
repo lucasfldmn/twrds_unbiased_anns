@@ -24,8 +24,8 @@
             "model": "SimpleCNN",
             "loss_function": "mse",
             "optimizer": "Adam",
-            "batch_size": 20,
-            "n_epochs": 20
+            "batch_size": 16,
+            "n_epochs": 25
         },
         {
             "name": "control_small_std_dev",
@@ -46,8 +46,8 @@
             "model": "SimpleCNN",
             "loss_function": "mse",
             "optimizer": "Adam",
-            "batch_size": 20,
-            "n_epochs": 20
+            "batch_size": 16,
+            "n_epochs": 25
         }
     ]
 }
