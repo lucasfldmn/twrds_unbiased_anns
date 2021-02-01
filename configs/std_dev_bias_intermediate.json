@@ -1,7 +1,6 @@
 {
     "general": {
-            "eval_sample_filename": "sample_eval_{}.data",
-            "eval_sample_size": 500,
+            "eval_sample_filename": "sample_eval_500_balanced.data",
             "repeats_per_model": 5
     },
     "configs": [
