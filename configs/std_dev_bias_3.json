@@ -47,28 +47,6 @@
             "optimizer": "Adam",
             "batch_size": 16,
             "n_epochs": 25
-        },
-		    {
-            "name": "stddev_7",
-            "dataset_size": 300,
-            "perc_white_square": 25,
-            "mean_white_square": 50,
-            "stddev_white_square": 7,
-            "perc_white_circle": 25,
-            "mean_white_circle": 50,
-            "stddev_white_circle": 7,
-            "perc_colorful_square": 25,
-            "mean_colorful_square": 25,
-            "stddev_colorful_square": 7,
-            "perc_colorful_circle": 25,
-            "mean_colorful_circle": 25,
-            "stddev_colorful_circle": 7,
-            "colors": ["red"],
-            "model": "SimpleCNN",
-            "loss_function": "mse",
-            "optimizer": "Adam",
-            "batch_size": 16,
-            "n_epochs": 25
         }
     ]
 }
