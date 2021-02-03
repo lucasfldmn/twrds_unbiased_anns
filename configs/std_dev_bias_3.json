@@ -5,7 +5,7 @@
     },
     "configs": [
 		{
-            "name": "stddev_30",
+            "name": "stddev_12",
             "dataset_size": 300,
             "perc_white_square": 25,
             "mean_white_square": 50,
@@ -27,7 +27,7 @@
             "n_epochs": 25
         },
         {
-            "name": "stddev_20",
+            "name": "stddev_8",
             "dataset_size": 300,
             "perc_white_square": 25,
             "mean_white_square": 50,
@@ -49,7 +49,7 @@
             "n_epochs": 25
         },
 		    {
-            "name": "stddev_15",
+            "name": "stddev_7",
             "dataset_size": 300,
             "perc_white_square": 25,
             "mean_white_square": 50,
