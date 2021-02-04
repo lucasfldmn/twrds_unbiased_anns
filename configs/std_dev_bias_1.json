@@ -1,10 +1,10 @@
 {
     "general": {
-            "eval_sample_filename": "sample_eval_500_balanced.data",
-            "repeats_per_model": 5
+        "eval_sample_filename": "sample_eval_500_balanced.data",
+        "repeats_per_model": 5
     },
     "configs": [
-		{
+        {
             "name": "stddev_30",
             "dataset_size": 300,
             "perc_white_square": 25,
@@ -19,7 +19,9 @@
             "perc_colorful_circle": 25,
             "mean_colorful_circle": 25,
             "stddev_colorful_circle": 30,
-            "colors": ["red"],
+            "colors": [
+                "red"
+            ],
             "model": "SimpleCNN",
             "loss_function": "mse",
             "optimizer": "Adam",
@@ -41,29 +43,9 @@
             "perc_colorful_circle": 25,
             "mean_colorful_circle": 25,
             "stddev_colorful_circle": 20,
-            "colors": ["red"],
-            "model": "SimpleCNN",
-            "loss_function": "mse",
-            "optimizer": "Adam",
-            "batch_size": 16,
-            "n_epochs": 25
-        },
-		    {
-            "name": "stddev_15",
-            "dataset_size": 300,
-            "perc_white_square": 25,
-            "mean_white_square": 50,
-            "stddev_white_square": 15,
-            "perc_white_circle": 25,
-            "mean_white_circle": 50,
-            "stddev_white_circle": 15,
-            "perc_colorful_square": 25,
-            "mean_colorful_square": 25,
-            "stddev_colorful_square": 15,
-            "perc_colorful_circle": 25,
-            "mean_colorful_circle": 25,
-            "stddev_colorful_circle": 15,
-            "colors": ["red"],
+            "colors": [
+                "red"
+            ],
             "model": "SimpleCNN",
             "loss_function": "mse",
             "optimizer": "Adam",

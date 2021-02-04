@@ -1,8 +1,8 @@
 {
     "general": {
-            "eval_sample_filename": "sample_eval_{}.data",
-            "eval_sample_size": 500,
-            "repeats_per_model": 5
+        "eval_sample_filename": "sample_eval_{}.data",
+        "eval_sample_size": 500,
+        "repeats_per_model": 5
     },
     "configs": [
         {
@@ -20,7 +20,9 @@
             "perc_colorful_circle": 25,
             "mean_colorful_circle": 50,
             "stddev_colorful_circle": 30,
-            "colors": ["red"],
+            "colors": [
+                "red"
+            ],
             "model": "SimpleCNN",
             "loss_function": "mse",
             "optimizer": "Adam",
@@ -42,7 +44,9 @@
             "perc_colorful_circle": 25,
             "mean_colorful_circle": 50,
             "stddev_colorful_circle": 5,
-            "colors": ["red"],
+            "colors": [
+                "red"
+            ],
             "model": "SimpleCNN",
             "loss_function": "mse",
             "optimizer": "Adam",
