@@ -2,38 +2,26 @@ import io
 import matplotlib.pyplot as plt
 
 def make_shape(shape = 'square', color = 'red', size = 50):
-	# Define figure
-	fig = plt.figure(figsize = (5,5))
-	ax = fig.gca()
-
-	# Set background and plotting area to black, remove axis
-	plt.axis('off')
- 
-
-	# Draw shape depending on type
-	if shape == 'square':
-		# Draw square
-		# Calculate width and height
-		square_size = size/100
-		# Calculate starting coordinates as rectangles are drawn from the bottom left corner
-		starting_pos = (1 - square_size) / 2
-		circle = plt.Rectangle(xy = (starting_pos, starting_pos), width = square_size, height = square_size, color = color)
-		ax.add_artist(circle)		
-	if shape == 'circle':
-		# Draw circle
-		circle = plt.Circle(xy = (0.5, 0.5), radius = 0.5*size/100, color = color)
-		ax.add_artist(circle)
-
-	# Save figure to buffer
-	buffer = io.BytesIO()
-	plt.savefig(buffer, format='png', facecolor = 'black')
-
-	# Close figure
-	plt.close()
-
-	# Return pointer to buffered image
-	buffer.seek(0)
-	return buffer.getvalue()
+  # Check if color is given as string or RGB
+  if isinstance(color, str):
+    # Convert color string to RGB
+    (r, b, g) = mcolors.to_rgb(color)
+    (r, b, g) = (r*255, b*255, g*255)
+  else: 
+    # Extract rgb values
+    (r, b, g) = color
+  # Make empty image
+  img = np.zeros((360, 360, 3), dtype = "uint8")
+  # Draw shape depending on size
+  if shape == 'square':
+    # Calculate upper left image edge based on size
+    starting_point = 180-size
+    end_point = starting_point + size*2
+    cv2.rectangle(img, (starting_point, starting_point), (end_point, end_point), (b, g, r), -1) 
+  elif shape == 'circle':
+    cv2.circle(img, (180, 180), size, (b, g, r), -1) 
+  # Return image array
+  return np.asarray(img)
 
 def make_square(color = 'red', size = 50):
 	return make_shape('square', color, size)
