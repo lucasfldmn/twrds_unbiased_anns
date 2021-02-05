@@ -1,5 +1,6 @@
-import io
-import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+import numpy as np
+import cv2
 
 def make_shape(shape = 'square', color = 'red', size = 50):
   # Check if color is given as string or RGB
