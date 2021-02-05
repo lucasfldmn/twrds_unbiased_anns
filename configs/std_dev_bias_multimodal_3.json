@@ -1,25 +1,24 @@
 {
     "general": {
-        "eval_sample_filename": "sample_eval_{}.data",
-        "eval_sample_size": 500,
+        "eval_sample_filename": "sample_eval_500_balanced.data",
         "repeats_per_model": 5
     },
     "configs": [
         {
-            "name": "control_large_std_dev",
+            "name": "stddev_multi_15",
             "dataset_size": 300,
             "perc_white_square": 25,
-            "mean_white_square": 50,
-            "stddev_white_square": 30,
+            "mean_white_square": 120,
+            "stddev_white_square": 15,
             "perc_white_circle": 25,
-            "mean_white_circle": 50,
-            "stddev_white_circle": 30,
+            "mean_white_circle": 90,
+            "stddev_white_circle": 15,
             "perc_colorful_square": 25,
-            "mean_colorful_square": 50,
-            "stddev_colorful_square": 30,
+            "mean_colorful_square": 60,
+            "stddev_colorful_square": 15,
             "perc_colorful_circle": 25,
-            "mean_colorful_circle": 50,
-            "stddev_colorful_circle": 30,
+            "mean_colorful_circle": 30,
+            "stddev_colorful_circle": 15,
             "colors": [
                 "red"
             ],
@@ -30,20 +29,20 @@
             "n_epochs": 25
         },
         {
-            "name": "control_small_std_dev",
+            "name": "stddev_multi_30",
             "dataset_size": 300,
             "perc_white_square": 25,
-            "mean_white_square": 50,
-            "stddev_white_square": 5,
+            "mean_white_square": 120,
+            "stddev_white_square": 30,
             "perc_white_circle": 25,
-            "mean_white_circle": 50,
-            "stddev_white_circle": 5,
+            "mean_white_circle": 90,
+            "stddev_white_circle": 30,
             "perc_colorful_square": 25,
-            "mean_colorful_square": 50,
-            "stddev_colorful_square": 5,
+            "mean_colorful_square": 60,
+            "stddev_colorful_square": 30,
             "perc_colorful_circle": 25,
-            "mean_colorful_circle": 50,
-            "stddev_colorful_circle": 5,
+            "mean_colorful_circle": 30,
+            "stddev_colorful_circle": 30,
             "colors": [
                 "red"
             ],
