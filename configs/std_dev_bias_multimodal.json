@@ -51,6 +51,102 @@
             "optimizer": "Adam",
             "batch_size": 16,
             "n_epochs": 25
+        },
+        {
+            "name": "stddev_multi_20",
+            "dataset_size": 300,
+            "perc_white_square": 25,
+            "mean_white_square": 120,
+            "stddev_white_square": 20,
+            "perc_white_circle": 25,
+            "mean_white_circle": 90,
+            "stddev_white_circle": 20,
+            "perc_colorful_square": 25,
+            "mean_colorful_square": 60,
+            "stddev_colorful_square": 20,
+            "perc_colorful_circle": 25,
+            "mean_colorful_circle": 30,
+            "stddev_colorful_circle": 20,
+            "colors": [
+                "red"
+            ],
+            "model": "SimpleCNN",
+            "loss_function": "mse",
+            "optimizer": "Adam",
+            "batch_size": 16,
+            "n_epochs": 25
+        },
+        {
+            "name": "stddev_multi_3",
+            "dataset_size": 300,
+            "perc_white_square": 25,
+            "mean_white_square": 120,
+            "stddev_white_square": 3,
+            "perc_white_circle": 25,
+            "mean_white_circle": 90,
+            "stddev_white_circle": 3,
+            "perc_colorful_square": 25,
+            "mean_colorful_square": 60,
+            "stddev_colorful_square": 3,
+            "perc_colorful_circle": 25,
+            "mean_colorful_circle": 30,
+            "stddev_colorful_circle": 3,
+            "colors": [
+                "red"
+            ],
+            "model": "SimpleCNN",
+            "loss_function": "mse",
+            "optimizer": "Adam",
+            "batch_size": 16,
+            "n_epochs": 25
+        },
+        {
+            "name": "stddev_multi_15",
+            "dataset_size": 300,
+            "perc_white_square": 25,
+            "mean_white_square": 120,
+            "stddev_white_square": 15,
+            "perc_white_circle": 25,
+            "mean_white_circle": 90,
+            "stddev_white_circle": 15,
+            "perc_colorful_square": 25,
+            "mean_colorful_square": 60,
+            "stddev_colorful_square": 15,
+            "perc_colorful_circle": 25,
+            "mean_colorful_circle": 30,
+            "stddev_colorful_circle": 15,
+            "colors": [
+                "red"
+            ],
+            "model": "SimpleCNN",
+            "loss_function": "mse",
+            "optimizer": "Adam",
+            "batch_size": 16,
+            "n_epochs": 25
+        },
+        {
+            "name": "stddev_multi_30",
+            "dataset_size": 300,
+            "perc_white_square": 25,
+            "mean_white_square": 120,
+            "stddev_white_square": 30,
+            "perc_white_circle": 25,
+            "mean_white_circle": 90,
+            "stddev_white_circle": 30,
+            "perc_colorful_square": 25,
+            "mean_colorful_square": 60,
+            "stddev_colorful_square": 30,
+            "perc_colorful_circle": 25,
+            "mean_colorful_circle": 30,
+            "stddev_colorful_circle": 30,
+            "colors": [
+                "red"
+            ],
+            "model": "SimpleCNN",
+            "loss_function": "mse",
+            "optimizer": "Adam",
+            "batch_size": 16,
+            "n_epochs": 25
         }
     ]
 }
