@@ -96,13 +96,13 @@ def load_eval_samples(eval_sample_filename):
     eval_samples = pickle.load(filehandle)
   return eval_samples
 
-def evaluate_performance(group_sample, model):
+def evaluate_performance(group_sample, model, colors):
   # Feed sample to model and store targets and prediction
   actual = []
   prediction = []
   for single_sample in group_sample:
     # Convert to tensor
-    shape_tensor, target_size = convert_sample_to_tensor(single_sample)
+    shape_tensor, target_size = convert_sample_to_tensor(single_sample, colors)
     # Reshape the tensor
     shape_tensor = tf.reshape(shape_tensor, [1,360,360,3])
     # Feed to model

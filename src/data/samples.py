@@ -54,7 +54,7 @@ def create_sample_array(n_samples, white_square, white_circle, colorful_square, 
   # Return result
   return samples
 
-def convert_sample_to_np_array(sample):  
+def convert_sample_to_np_array(sample, colors):  
   # Get sample color
   if sample[0]:
     sample_color = 'white'
@@ -73,9 +73,9 @@ def convert_sample_to_np_array(sample):
   # Return numpy array and size
   return shape_array, sample_size
 
-def convert_sample_to_tensor(sample):
+def convert_sample_to_tensor(sample, colors):
   # Convert sample to numpy array
-  sample_np_array, sample_size = convert_sample_to_np_array(sample)
+  sample_np_array, sample_size = convert_sample_to_np_array(sample, colors)
   # Convert array to tensor
   img_tensor = tf.convert_to_tensor(sample_np_array, dtype=tf.int32)
   # Divide image tensor by 255 to normalize values
@@ -83,14 +83,14 @@ def convert_sample_to_tensor(sample):
   # Return tensor and size
   return img_tensor, sample_size
 
-def make_tf_dataset(samples, divide_by_255 = True):
+def make_tf_dataset(samples, divide_by_255 = True, colors = ['red']):
   
   # Iterate over samples and create list of numpy image arrays and list of target
   images = []
   targets = []
   for sample in samples:
     # Convert sample to numpy array of the image
-    shape_tensor, sample_size = convert_sample_to_np_array(sample)
+    shape_tensor, sample_size = convert_sample_to_np_array(sample, colors)
     images.append(shape_tensor)
     targets.append(sample_size)
 
