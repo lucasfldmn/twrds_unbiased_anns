@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 import scipy.stats as stats
+from .shapes import make_circle, make_square
 
 def draw_from_truncated_normal_distribution(n_samples, mean, stddev = 30):
   # Set lower and upper bounds for truncation

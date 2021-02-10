@@ -1,6 +1,7 @@
 import pickle
 import numpy as np
 import pandas as pd
+import tensorflow as tf
 from .samples import draw_from_truncated_normal_distribution, convert_sample_to_tensor
 
 def create_eval_samples(n_samples, same_data = True):  
