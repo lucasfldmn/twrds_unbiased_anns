@@ -5,6 +5,54 @@
     },
     "configs": [
         {
+            "name": "underrep_1",
+            "dataset_size": 300,
+            "perc_white_square": 49.5,
+            "mean_white_square": 100,
+            "stddev_white_square": 20,
+            "perc_white_circle": 49.5,
+            "mean_white_circle": 100,
+            "stddev_white_circle": 20,
+            "perc_colorful_square": 0.5,
+            "mean_colorful_square": 50,
+            "stddev_colorful_square": 20,
+            "perc_colorful_circle": 0.5,
+            "mean_colorful_circle": 50,
+            "stddev_colorful_circle": 20,
+            "colors": [
+                "red"
+            ],
+            "model": "SimpleCNN",
+            "loss_function": "mse",
+            "optimizer": "Adam",
+            "batch_size": 16,
+            "n_epochs": 25
+        },
+        {
+            "name": "underrep_5",
+            "dataset_size": 300,
+            "perc_white_square": 47.5,
+            "mean_white_square": 100,
+            "stddev_white_square": 20,
+            "perc_white_circle": 47.5,
+            "mean_white_circle": 100,
+            "stddev_white_circle": 20,
+            "perc_colorful_square": 2.5,
+            "mean_colorful_square": 50,
+            "stddev_colorful_square": 20,
+            "perc_colorful_circle": 2.5,
+            "mean_colorful_circle": 50,
+            "stddev_colorful_circle": 20,
+            "colors": [
+                "red"
+            ],
+            "model": "SimpleCNN",
+            "loss_function": "mse",
+            "optimizer": "Adam",
+            "batch_size": 16,
+            "n_epochs": 25
+        },
+        {
             "name": "underrep_10",
             "dataset_size": 300,
             "perc_white_square": 45,
