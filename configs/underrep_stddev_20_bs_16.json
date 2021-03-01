@@ -6,7 +6,7 @@
     "configs": [
         {
             "name": "underrep_1",
-            "dataset_size": 300,
+            "dataset_size": 400,
             "perc_white_square": 49.5,
             "mean_white_square": 100,
             "stddev_white_square": 20,
@@ -30,7 +30,7 @@
         },
         {
             "name": "underrep_5",
-            "dataset_size": 300,
+            "dataset_size": 400,
             "perc_white_square": 47.5,
             "mean_white_square": 100,
             "stddev_white_square": 20,
@@ -54,7 +54,7 @@
         },
         {
             "name": "underrep_10",
-            "dataset_size": 300,
+            "dataset_size": 400,
             "perc_white_square": 45,
             "mean_white_square": 100,
             "stddev_white_square": 20,
@@ -78,7 +78,7 @@
         },         
         {
             "name": "underrep_20",
-            "dataset_size": 300,
+            "dataset_size": 400,
             "perc_white_square": 40,
             "mean_white_square": 100,
             "stddev_white_square": 20,
@@ -102,7 +102,7 @@
         },          
         {
             "name": "underrep_30",
-            "dataset_size": 300,
+            "dataset_size": 400,
             "perc_white_square": 35,
             "mean_white_square": 100,
             "stddev_white_square": 20,
@@ -126,7 +126,7 @@
         },          
         {
             "name": "underrep_40",
-            "dataset_size": 300,
+            "dataset_size": 400,
             "perc_white_square": 30,
             "mean_white_square": 100,
             "stddev_white_square": 20,
@@ -150,7 +150,7 @@
         },
         {
             "name": "underrep_50",
-            "dataset_size": 300,
+            "dataset_size": 400,
             "perc_white_square": 25,
             "mean_white_square": 100,
             "stddev_white_square": 20,
