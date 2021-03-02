@@ -9,17 +9,17 @@ class SimpleCNN(tf.keras.Model):
         # Define layers
         self.network_layers = [
           # Convolutional layers with zero padding and maxpooling inbetween
-          Conv2D(32, (3, 3), padding = "same", activation = "relu", input_shape=(360, 360, 4)), 
-          MaxPool2D(pool_size = (2, 2)),          
-          Conv2D(64, (3, 3), padding = "same", activation = "relu"),
-          MaxPool2D(pool_size = (2, 2)),
-          Conv2D(64, (3, 3), padding = "same", activation = "relu"),
+          Conv2D(32, (3, 3), padding = "same", activation = "relu", input_shape=(360, 360, 4), name = "conv_1"), 
+          MaxPool2D(pool_size = (2, 2), name = "pool_1"),          
+          Conv2D(64, (3, 3), padding = "same", activation = "relu", name = "conv_2"),
+          MaxPool2D(pool_size = (2, 2), name = "pool_2"),
+          Conv2D(64, (3, 3), padding = "same", activation = "relu", name = "conv_3"),
           # Flatten the feature maps
-          Flatten(),
+          Flatten(name = "flat_1"),
           # Fully connected layers to funnel flat tensor into single value
-          Dense(100, activation='relu'),
-          Dense(20, activation='relu'),
-          Dense(1)
+          Dense(100, activation='relu', name = "dense_1"),
+          Dense(20, activation='relu', name = "dense_2"),
+          Dense(1, name = "dense_3")
         ]    
         
     def call(self, x):
