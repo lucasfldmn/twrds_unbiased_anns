@@ -26,7 +26,7 @@
             "loss_function": "mse",
             "optimizer": "Adam",
             "batch_size": 16,
-            "n_epochs": 25
+            "n_epochs": 10
         },
         {
             "name": "meandiff_5",
@@ -50,7 +50,7 @@
             "loss_function": "mse",
             "optimizer": "Adam",
             "batch_size": 16,
-            "n_epochs": 25
+            "n_epochs": 10
         },
         {
             "name": "meandiff_10",
@@ -74,7 +74,7 @@
             "loss_function": "mse",
             "optimizer": "Adam",
             "batch_size": 16,
-            "n_epochs": 25
+            "n_epochs": 10
         },
         {
             "name": "meandiff_15",
@@ -98,7 +98,7 @@
             "loss_function": "mse",
             "optimizer": "Adam",
             "batch_size": 16,
-            "n_epochs": 25
+            "n_epochs": 10
         },
         {
             "name": "meandiff_20",
@@ -122,7 +122,7 @@
             "loss_function": "mse",
             "optimizer": "Adam",
             "batch_size": 16,
-            "n_epochs": 25
+            "n_epochs": 10
         },
         {
             "name": "meandiff_30",
@@ -146,7 +146,7 @@
             "loss_function": "mse",
             "optimizer": "Adam",
             "batch_size": 16,
-            "n_epochs": 25
+            "n_epochs": 10
         },
         {
             "name": "meandiff_40",
@@ -170,7 +170,7 @@
             "loss_function": "mse",
             "optimizer": "Adam",
             "batch_size": 16,
-            "n_epochs": 25
+            "n_epochs": 10
         },
         {
             "name": "meandiff_50",
@@ -194,7 +194,7 @@
             "loss_function": "mse",
             "optimizer": "Adam",
             "batch_size": 16,
-            "n_epochs": 25
+            "n_epochs": 10
         },
         {
             "name": "meandiff_60",
@@ -218,7 +218,7 @@
             "loss_function": "mse",
             "optimizer": "Adam",
             "batch_size": 16,
-            "n_epochs": 25
+            "n_epochs": 10
         }
     ]
 }
