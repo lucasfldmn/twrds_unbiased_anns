@@ -114,6 +114,33 @@ def evaluate_performance(group_sample, model, colors):
   # Return lists of actual values and predicted values
   return actual, prediction
 
+def evaluate_model(model, eval_samples):
+  # Create dictionary with model information
+  row = {
+      "run": run_name,
+      "date": cur_date,
+      "model": modelname,
+      "loss": lossname,
+      "category": category,
+      "m_diff": m_diff,
+      "stddev": std,
+      "minority_share": share,
+      "repeat": repeat
+  }    
+
+  # Go through evaluation samples and create a row for each
+  for (group_sample, (label)) in eval_samples:
+    # Evaluate performance
+    actuals, predictions = evaluate_performance(group_sample, model, colors)
+    # Store results      
+    row["shape_color"] = label.split("_")[0]
+    row["shape_type"] = label.split("_")[1]
+    # Write everything to results
+    for idx, actual in enumerate(actuals):
+      row["actual"] = actual
+      row["prediction"] = predictions[idx]
+      results.append(row.copy())
+
 def store_results(results, filename):
   # Create dataframe from results
   result_df = pd.DataFrame(results)
