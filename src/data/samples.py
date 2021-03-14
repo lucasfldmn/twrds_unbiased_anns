@@ -14,6 +14,26 @@ def draw_from_truncated_normal_distribution(n_samples, mean, stddev = 30):
   samples = stats.truncnorm.rvs((lower-mu)/sigma, (upper-mu)/sigma, loc = mu, scale = sigma, size = n_samples)
   return np.reshape(samples.round(), (n_samples, 1))
 
+def get_sample_params(category, m_diff, std, share, center = 75):
+  # Calculate group mean
+  mean_1 = 75 + m_diff / 2
+  mean_2 = 75 - m_diff / 2
+  # Calculate group share
+  share_1 = (100 - share) / 2
+  share_2 = share / 2
+  # Set parameters based on the categories used to determine the split
+  if category == "color":
+    white_square = [share_1, mean_1, std]
+    white_circle = [share_1, mean_1, std]
+    colorful_square = [share_2, mean_2, std]
+    colorful_circle = [share_2, mean_2, std]
+  elif category == "shape":
+    white_square = [share_1, mean_1, std]
+    white_circle = [share_2, mean_2, std]
+    colorful_square = [share_1, mean_1, std]
+    colorful_circle = [share_2, mean_2, std]
+  return white_square, white_circle, colorful_square, colorful_circle
+
 def create_sample_array(n_samples, white_square, white_circle, colorful_square, colorful_circle):
   # Calculate number of samples for each group
   n_white_square = round(n_samples * white_square[0] / 100)
@@ -83,8 +103,7 @@ def convert_sample_to_tensor(sample, colors):
   # Return tensor and size
   return img_tensor, sample_size
 
-def make_tf_dataset(samples, divide_by_255 = True, colors = ['red']):
-  
+def get_sample_data(samples):    
   # Iterate over samples and create list of numpy image arrays and list of target
   images = []
   targets = []
@@ -101,6 +120,5 @@ def make_tf_dataset(samples, divide_by_255 = True, colors = ['red']):
   # Divide image tensor by 255 to normalize values
   img_tensor = img_tensor / 255
   
-  # Convert to tensorflow dataset and return results
-  dataset = tf.data.Dataset.from_tensor_slices((img_tensor, target_tensor))
-  return dataset
+  # Return images and targets
+  return img_tensor, target_tensor
