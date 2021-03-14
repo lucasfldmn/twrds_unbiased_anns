@@ -114,20 +114,7 @@ def evaluate_performance(group_sample, model, colors):
   # Return lists of actual values and predicted values
   return actual, prediction
 
-def evaluate_model(model, eval_samples):
-  # Create dictionary with model information
-  row = {
-      "run": run_name,
-      "date": cur_date,
-      "model": modelname,
-      "loss": lossname,
-      "category": category,
-      "m_diff": m_diff,
-      "stddev": std,
-      "minority_share": share,
-      "repeat": repeat
-  }    
-
+def evaluate_model(model, eval_samples, row, results, colors):
   # Go through evaluation samples and create a row for each
   for (group_sample, (label)) in eval_samples:
     # Evaluate performance
