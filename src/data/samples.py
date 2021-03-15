@@ -150,7 +150,7 @@ def gen_from_sample(samples):
         yield img_tensor, target_tensor
 
 
-def dataset_from_gen(sample):
+def dataset_from_gen(sample, n_epochs, batch_size):
     dataset = tf.data.Dataset.from_generator(
         lambda: gen_from_sample(sample),
         output_signature=(
