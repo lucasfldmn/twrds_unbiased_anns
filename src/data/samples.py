@@ -136,7 +136,7 @@ def get_sample_data(samples):
     return img_tensor, target_tensor
 
 
-def gen_from_sample(samples):
+def gen_from_sample(samples, colors):
     # Iterate over samples and create list of numpy image arrays and list of target
     for sample in samples:
         # Convert sample to numpy array of the image
@@ -150,9 +150,9 @@ def gen_from_sample(samples):
         yield img_tensor, target_tensor
 
 
-def dataset_from_gen(sample, n_epochs, batch_size):
+def dataset_from_gen(sample, n_epochs, batch_size, colors):
     dataset = tf.data.Dataset.from_generator(
-        lambda: gen_from_sample(sample),
+        lambda: gen_from_sample(sample, colors),
         output_signature=(
             tf.TensorSpec(shape=(360, 360, 3), dtype=tf.float32),
             tf.TensorSpec(shape=(), dtype=tf.float32)
