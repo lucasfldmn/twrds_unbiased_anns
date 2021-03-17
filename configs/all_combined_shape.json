@@ -49,7 +49,6 @@
         50
     ],
     "categorical": [
-        "color",
         "shape"
     ],
     "models": [

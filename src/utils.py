@@ -1,6 +1,8 @@
 import json
 import tensorflow as tf
 import gc
+import os
+import shutil
 
 def load_configs_from_file(filepath):
   with open(filepath, 'r') as filehandle:
@@ -38,3 +40,15 @@ def load_config_from_file(filepath):
   loss_functions = config_json["loss_functions"]
   # Return variables
   return name, eval_sample_filename, dataset_size, colors, optimizer, repeats_per_model, batch_size, n_epochs, mean_diffs, stddevs, minority_shares, categorical, models, loss_functions
+
+def rmdir(path):
+  shutil.rmtree(path)
+
+def mkdir(path):
+  try: 
+    os.mkdir(path) 
+  except OSError as error: 
+    print(error)
+    print("Deleting directory and creating again ...")
+    rmdir(path)
+    os.mkdir(path)

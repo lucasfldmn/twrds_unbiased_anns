@@ -90,9 +90,9 @@ def create_and_save_eval_sample(n_eval_samples, filepath):
   with open(filepath, 'wb') as filehandle:
       pickle.dump(eval_samples, filehandle)
 
-def load_eval_samples(eval_sample_filename):
+def load_eval_samples(eval_sample_filepath):
   # Load evaluation sample
-  with open("/content/twrds_unbiased_anns/data/eval/" + eval_sample_filename, 'rb') as filehandle:
+  with open(eval_sample_filepath, 'rb') as filehandle:
     eval_samples = pickle.load(filehandle)
   return eval_samples
 
