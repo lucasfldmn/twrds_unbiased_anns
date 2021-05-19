@@ -2,20 +2,20 @@ import pickle
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from .samples import draw_from_truncated_normal_distribution, convert_sample_to_tensor
+from .samples import draw_from_truncated_normal_distribution, convert_sample_to_tensor, get_label
 
 def create_eval_samples(n_samples, same_data = True):  
   if same_data:
 
     # Set parameters
     percentage = 25
-    mean = 75
+    mean = 100
 
     # Calculate number of samples for each group
     n_samples_per_cat = round(n_samples * percentage / 100)    
 
     # Get size data (actuals)
-    size = draw_from_truncated_normal_distribution(n_samples_per_cat, mean)
+    size = draw_from_truncated_normal_distribution(n_samples_per_cat, mean, 20)
 
     # Build arrays for each category
     color = np.ones((n_samples_per_cat,1), dtype = bool) # True = white
@@ -110,23 +110,57 @@ def evaluate_performance(group_sample, model, colors):
     # Store prediction and target in list
     actual.append(target_size)
     prediction.append(output.numpy()[0][0])
-
   # Return lists of actual values and predicted values
   return actual, prediction
 
-def evaluate_model(model, eval_samples, row, results, colors):
-  # Go through evaluation samples and create a row for each
-  for (group_sample, (label)) in eval_samples:
-    # Evaluate performance
-    actuals, predictions = evaluate_performance(group_sample, model, colors)
-    # Store results      
-    row["shape_color"] = label.split("_")[0]
-    row["shape_type"] = label.split("_")[1]
-    # Write everything to results
-    for idx, actual in enumerate(actuals):
-      row["actual"] = actual
-      row["prediction"] = predictions[idx]
-      results.append(row.copy())
+def evaluate_performance_class(group_sample, model, colors, threshold):
+  # Feed sample to model and store size, actual and prediction
+  size = []
+  actual = []
+  prediction = []
+  for single_sample in group_sample:
+    # Convert to tensor
+    shape_tensor, target_size = convert_sample_to_tensor(single_sample, colors)
+    # Reshape the tensor
+    shape_tensor = tf.reshape(shape_tensor, [1,360,360,3])
+    # Feed to model
+    output = model(shape_tensor)
+    # Get true label
+    label = get_label(target_size, threshold, noise = 0)
+    # Store size, prediction and target in list
+    size.append(target_size)
+    actual.append(label)
+    prediction.append(output.numpy()[0][0])
+  # Return lists of actual values and predicted values
+  return size, actual, prediction
+
+def evaluate_model(model, eval_samples, row, results, colors, task_type = "reg", threshold = 75):
+  # Evaluate performance depending on task type
+  if task_type == "reg":
+    # Go through evaluation samples and create a row for each
+    for (group_sample, (label)) in eval_samples:    
+      actuals, predictions = evaluate_performance(group_sample, model, colors)
+      # Store results      
+      row["shape_color"] = label.split("_")[0]
+      row["shape_type"] = label.split("_")[1]
+      # Write everything to results
+      for idx, actual in enumerate(actuals):
+        row["actual"] = actual
+        row["prediction"] = predictions[idx]
+        results.append(row.copy())
+  elif task_type == "class":
+    # Go through evaluation samples and create a row for each
+    for (group_sample, (label)) in eval_samples:
+      sizes, actuals, predictions = evaluate_performance_class(group_sample, model, colors, threshold)
+      # Store results      
+      row["shape_color"] = label.split("_")[0]
+      row["shape_type"] = label.split("_")[1]
+      # Write everything to results
+      for idx, actual in enumerate(actuals):
+        row["size"] = sizes[idx]
+        row["actual"] = actual
+        row["prediction"] = predictions[idx]
+        results.append(row.copy())
 
 def store_results(results, filename):
   # Create dataframe from results

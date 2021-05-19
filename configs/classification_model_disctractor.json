@@ -1,0 +1,50 @@
+{
+    "name": "class_model_{}_loss_{}_cat_{}_meandiff_{}_std_{}_share_{}_thresh_{}_noise_{}",
+    "eval_sample_filename": "sample_eval_500_balanced.data",
+    "dataset_size": 400,
+    "colors": [
+        "red"
+    ],
+    "optimizer": "Adam",
+    "repeats_per_model": 5,
+    "batch_size": 16,
+    "n_epochs": 25,
+    "mean_diffs": [
+        0,
+        30,
+        50
+    ],
+    "stddevs": [
+        3,
+        5,
+        10,
+        20,
+        30
+    ],
+    "minority_shares": [
+        5,
+        10,
+        30,
+        50
+    ],
+    "thresholds": [
+        60,
+        75,
+        90
+    ],
+    "noises": [
+        0
+    ],
+    "categorical": [
+        "color",
+        "shape"
+    ],
+    "models": [
+        "SmallCNN",
+        "SimpleCNN",
+        "MiniCNN"
+    ],
+    "loss_functions": [
+        "bce"
+    ]
+}

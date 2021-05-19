@@ -19,11 +19,11 @@ def free_memory():
   # Do garbage collection explicitly 
   gc.collect()
 
-def load_config_from_file(filepath):
+def load_config_from_file(filepath, task_type = "reg"):
   # Open json file
   with open(filepath, 'r') as filehandle:
     config_json = json.load(filehandle)
-  # Load all variable
+  # Load all variables
   name = config_json["name"]
   eval_sample_filename = config_json["eval_sample_filename"]
   dataset_size = config_json["dataset_size"]
@@ -38,17 +38,25 @@ def load_config_from_file(filepath):
   categorical = config_json["categorical"]
   models = config_json["models"]
   loss_functions = config_json["loss_functions"]
-  # Return variables
-  return name, eval_sample_filename, dataset_size, colors, optimizer, repeats_per_model, batch_size, n_epochs, mean_diffs, stddevs, minority_shares, categorical, models, loss_functions
+  # Load additional variables for classification task
+  if task_type == "class":
+    thresholds = config_json["thresholds"]
+    noises = config_json["noises"]
+    # Return variables
+    return name, eval_sample_filename, dataset_size, colors, optimizer, repeats_per_model, batch_size, n_epochs, mean_diffs, stddevs, minority_shares, categorical, models, loss_functions, thresholds, noises
+  else:
+    # Return variables
+    return name, eval_sample_filename, dataset_size, colors, optimizer, repeats_per_model, batch_size, n_epochs, mean_diffs, stddevs, minority_shares, categorical, models, loss_functions
 
 def rmdir(path):
   shutil.rmtree(path)
 
-def mkdir(path):
+def mkdir(path, delete = True):
   try: 
     os.mkdir(path) 
   except OSError as error: 
     print(error)
-    print("Deleting directory and creating again ...")
-    rmdir(path)
-    os.mkdir(path)
+    if delete:
+      print("Deleting directory and creating again ...")
+      rmdir(path)
+      os.mkdir(path)
