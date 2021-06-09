@@ -1,0 +1,42 @@
+{
+    "name": "reg_model_{}_target_loss_weight_{}_attr_loss_weight_{}_loss_{}_cat_{}_meandiff_{}_std_{}_share_{}",
+    "eval_sample_filename": "eval_500_mean_100_std_20.data",
+    "dataset_size": 400,
+    "colors": [
+        "red"
+    ],
+    "optimizer": "Adam",
+    "repeats_per_model": 5,
+    "batch_size": 16,
+    "n_epochs": 50,
+    "mean_diffs": [
+        50
+    ],
+    "stddevs": [
+        3
+    ],
+    "minority_shares": [
+        50
+    ],
+    "categorical": [
+        "color",
+        "shape"
+    ],
+    "models": [
+        "GRAD"
+    ],
+    "loss_functions": [
+        "mse"
+    ],
+    "n_attributes": [
+        2
+    ],
+    "target_loss_weight": [
+        0.001
+    ],
+    "attr_loss_weight": [
+        1000,
+        100,
+        10
+    ]
+}

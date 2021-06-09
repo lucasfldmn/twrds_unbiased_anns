@@ -10,27 +10,16 @@
     "batch_size": 16,
     "n_epochs": 25,
     "mean_diffs": [
-        0,
-        30,
         50
     ],
     "stddevs": [
-        3,
-        5,
-        10,
-        20,
-        30
+        3
     ],
     "minority_shares": [
-        5,
-        10,
-        30,
         50
     ],
     "thresholds": [
-        60,
-        75,
-        90
+        75
     ],
     "noises": [
         0

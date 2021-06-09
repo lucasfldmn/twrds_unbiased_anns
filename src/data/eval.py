@@ -99,7 +99,9 @@ def load_eval_samples(eval_sample_filepath):
 def evaluate_performance(group_sample, model, colors):
   # Feed sample to model and store targets and prediction
   actual = []
-  prediction = []
+  target_prediction = []
+  color_prediction = []
+  shape_prediction = []
   for single_sample in group_sample:
     # Convert to tensor
     shape_tensor, target_size = convert_sample_to_tensor(single_sample, colors)
@@ -109,9 +111,17 @@ def evaluate_performance(group_sample, model, colors):
     output = model(shape_tensor)
     # Store prediction and target in list
     actual.append(target_size)
-    prediction.append(output.numpy()[0][0])
+    # Check if predictions are list -> GRAD model
+    if isinstance(output, list):
+      target_prediction.append(output[0].numpy()[0][0])
+      if len(output) > 1:
+        color_prediction.append(output[1].numpy()[0][0])
+      if len(output) > 2:
+        shape_prediction.append(output[2].numpy()[0][0])
+    else:
+      target_prediction.append(output.numpy()[0][0])
   # Return lists of actual values and predicted values
-  return actual, prediction
+  return actual, target_prediction, color_prediction, shape_prediction
 
 def evaluate_performance_class(group_sample, model, colors, threshold):
   # Feed sample to model and store size, actual and prediction
@@ -139,14 +149,18 @@ def evaluate_model(model, eval_samples, row, results, colors, task_type = "reg",
   if task_type == "reg":
     # Go through evaluation samples and create a row for each
     for (group_sample, (label)) in eval_samples:    
-      actuals, predictions = evaluate_performance(group_sample, model, colors)
+      actuals, target_predictions, color_predictions, shape_predictions = evaluate_performance(group_sample, model, colors)
       # Store results      
       row["shape_color"] = label.split("_")[0]
       row["shape_type"] = label.split("_")[1]
       # Write everything to results
       for idx, actual in enumerate(actuals):
         row["actual"] = actual
-        row["prediction"] = predictions[idx]
+        row["prediction"] = target_predictions[idx]
+        if len(color_predictions) > 0:
+          row["color_prediction"] = color_predictions[idx]
+        if len(shape_predictions) > 0:
+          row["shape_prediction"] = shape_predictions[idx]
         results.append(row.copy())
   elif task_type == "class":
     # Go through evaluation samples and create a row for each

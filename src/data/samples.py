@@ -147,7 +147,7 @@ def get_sample_data(samples):
     return img_tensor, (target_tensor, color_tensor, shape_tensor)
 
 
-def gen_from_sample(samples, colors):
+def gen_from_sample(samples, colors, attributes):
     # Iterate over samples and create list of numpy image arrays and list of target
     for sample in samples:
         # Convert sample to numpy array of the image
@@ -159,10 +159,19 @@ def gen_from_sample(samples, colors):
         shape_tensor = tf.convert_to_tensor(shape_bin, dtype=tf.int32) 
         # Divide image tensor by 255 to normalize values
         img_tensor = img_tensor / 255
-        # Yield input and targets
-        yield img_tensor, (target_tensor, color_tensor, shape_tensor)
+        # Yield input and targets + attributes
+        if "color" in attributes:
+            if "shape" in attributes:
+                yield img_tensor, (target_tensor, color_tensor, shape_tensor)
+            else:
+                yield img_tensor, (target_tensor, color_tensor)
+        else:
+            if "shape" in attributes:
+                yield img_tensor, (target_tensor, shape_tensor)
+            else:
+                yield img_tensor, target_tensor
 
-def gen_from_sample_class(samples, colors, threshold, noise, distractor):
+def gen_from_sample_class(samples, colors, threshold, noise, distractor, attributes):
     # Iterate over samples and create list of numpy image arrays and list of target
     for sample in samples:
         # Convert sample to numpy array of the image
@@ -188,8 +197,17 @@ def gen_from_sample_class(samples, colors, threshold, noise, distractor):
         shape_tensor = tf.convert_to_tensor(shape_bin, dtype=tf.int32)
         # Divide image tensor by 255 to normalize values
         img_tensor = img_tensor / 255
-        # Yield input and targets
-        yield img_tensor, (target_tensor, color_tensor, shape_tensor)
+        # Yield input and targets + attributes
+        if "color" in attributes:
+            if "shape" in attributes:
+                yield img_tensor, (target_tensor, color_tensor, shape_tensor)
+            else:
+                yield img_tensor, (target_tensor, color_tensor)
+        else:
+            if "shape" in attributes:
+                yield img_tensor, (target_tensor, shape_tensor)
+            else:
+                yield img_tensor, target_tensor        
 
 def get_label(size, threshold, noise):
     # Check if size is above threshold and assign label
@@ -199,27 +217,63 @@ def get_label(size, threshold, noise):
         label = 0 if label == 1 else 1
     return label
 
-def dataset_from_gen(sample, n_epochs, batch_size, colors, task_type = "reg", threshold = 75, noise = 0, distractor = 'color'):
+def dataset_from_gen(sample, n_epochs, batch_size, colors, task_type = "reg", threshold = 75, noise = 0, distractor = 'color', attributes = ["color", "shape"]):
     if task_type == "reg":
-        dataset = tf.data.Dataset.from_generator(
-            lambda: gen_from_sample(sample, colors),
-            output_signature=(
-                tf.TensorSpec(shape=(360, 360, 3), dtype=tf.float32),
-                (tf.TensorSpec(shape=(), dtype=tf.float32), 
-                tf.TensorSpec(shape=(), dtype=tf.int32), 
-                tf.TensorSpec(shape=(), dtype=tf.int32))
+        if len(attributes) == 2:
+            dataset = tf.data.Dataset.from_generator(
+                lambda: gen_from_sample(sample, colors, attributes),
+                output_signature=(
+                    tf.TensorSpec(shape=(360, 360, 3), dtype=tf.float32),
+                    (tf.TensorSpec(shape=(), dtype=tf.float32), 
+                    tf.TensorSpec(shape=(), dtype=tf.int32), 
+                    tf.TensorSpec(shape=(), dtype=tf.int32))
+                )
             )
-        )
+        elif len(attributes) == 1:
+            dataset = tf.data.Dataset.from_generator(
+                lambda: gen_from_sample(sample, colors, attributes),
+                output_signature=(
+                    tf.TensorSpec(shape=(360, 360, 3), dtype=tf.float32),
+                    (tf.TensorSpec(shape=(), dtype=tf.float32), 
+                    tf.TensorSpec(shape=(), dtype=tf.int32))
+                )
+            )
+        else:
+            dataset = tf.data.Dataset.from_generator(
+                lambda: gen_from_sample(sample, colors, attributes),
+                output_signature=(
+                    tf.TensorSpec(shape=(360, 360, 3), dtype=tf.float32),
+                    (tf.TensorSpec(shape=(), dtype=tf.float32))
+                )
+            )
     elif task_type == "class":
-        dataset = tf.data.Dataset.from_generator(
-            lambda: gen_from_sample_class(sample, colors, threshold, noise, distractor),
-            output_signature=(
-                tf.TensorSpec(shape=(360, 360, 3), dtype=tf.float32),
-                (tf.TensorSpec(shape=(), dtype=tf.int32), 
-                tf.TensorSpec(shape=(), dtype=tf.int32), 
-                tf.TensorSpec(shape=(), dtype=tf.int32))
+        if len(attributes) == 2:
+            dataset = tf.data.Dataset.from_generator(
+                lambda: gen_from_sample_class(sample, colors, threshold, noise, distractor, attributes),
+                output_signature=(
+                    tf.TensorSpec(shape=(360, 360, 3), dtype=tf.float32),
+                    (tf.TensorSpec(shape=(), dtype=tf.float32), 
+                    tf.TensorSpec(shape=(), dtype=tf.int32), 
+                    tf.TensorSpec(shape=(), dtype=tf.int32))
+                )
             )
-        )
+        elif len(attributes) == 1:
+            dataset = tf.data.Dataset.from_generator(
+                lambda: gen_from_sample_class(sample, colors, threshold, noise, distractor, attributes),
+                output_signature=(
+                    tf.TensorSpec(shape=(360, 360, 3), dtype=tf.float32),
+                    (tf.TensorSpec(shape=(), dtype=tf.float32), 
+                    tf.TensorSpec(shape=(), dtype=tf.int32))
+                )
+            )
+        else:
+            dataset = tf.data.Dataset.from_generator(
+                lambda: gen_from_sample_class(sample, colors, threshold, noise, distractor, attributes),
+                output_signature=(
+                    tf.TensorSpec(shape=(360, 360, 3), dtype=tf.float32),
+                    (tf.TensorSpec(shape=(), dtype=tf.float32))
+                )
+            )        
     dataset = dataset.repeat(n_epochs)
     dataset = dataset.batch(batch_size)
     return dataset

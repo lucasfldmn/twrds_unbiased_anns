@@ -38,15 +38,33 @@ def load_config_from_file(filepath, task_type = "reg"):
   categorical = config_json["categorical"]
   models = config_json["models"]
   loss_functions = config_json["loss_functions"]
+  
   # Load additional variables for classification task
   if task_type == "class":
     thresholds = config_json["thresholds"]
     noises = config_json["noises"]
-    # Return variables
-    return name, eval_sample_filename, dataset_size, colors, optimizer, repeats_per_model, batch_size, n_epochs, mean_diffs, stddevs, minority_shares, categorical, models, loss_functions, thresholds, noises
+    # Load attribute and target loss weights if they are there
+    if "attr_loss_weight" in config_json.keys():
+      attr_loss_weights = config_json["attr_loss_weight"]
+      target_loss_weights = config_json["target_loss_weight"]
+      n_attributes = config_json["n_attributes"]
+      # Return variables
+      return name, eval_sample_filename, dataset_size, colors, optimizer, repeats_per_model, batch_size, n_epochs, mean_diffs, stddevs, minority_shares, categorical, models, loss_functions, thresholds, noises, target_loss_weights, attr_loss_weights, n_attributes
+    else:
+      # Return variables
+      return name, eval_sample_filename, dataset_size, colors, optimizer, repeats_per_model, batch_size, n_epochs, mean_diffs, stddevs, minority_shares, categorical, models, loss_functions, thresholds, noises
   else:
-    # Return variables
-    return name, eval_sample_filename, dataset_size, colors, optimizer, repeats_per_model, batch_size, n_epochs, mean_diffs, stddevs, minority_shares, categorical, models, loss_functions
+    # Load attribute and target loss weights if they are there
+    if "attr_loss_weight" in config_json.keys():
+      attr_loss_weights = config_json["attr_loss_weight"]
+      target_loss_weights = config_json["target_loss_weight"]
+      n_attributes = config_json["n_attributes"]
+      # Return variables
+      return name, eval_sample_filename, dataset_size, colors, optimizer, repeats_per_model, batch_size, n_epochs, mean_diffs, stddevs, minority_shares, categorical, models, loss_functions, target_loss_weights, attr_loss_weights, n_attributes
+    else:
+      # Return variables
+      return name, eval_sample_filename, dataset_size, colors, optimizer, repeats_per_model, batch_size, n_epochs, mean_diffs, stddevs, minority_shares, categorical, models, loss_functions
+  
 
 def rmdir(path):
   shutil.rmtree(path)
